@@ -1,49 +1,107 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+* {
     margin: 0;
-    background: linear-gradient(135deg, #00b4d8, #90e0ef);
-    color: #fff;
-    }
-    
-    .container {
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    transition: background 0.5s ease; /* Hiệu ứng chuyển đổi mượt mà */
+}
+
+body {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 1.5rem;
-    }
-    
-    .clock {
-    font-size: 6rem;
-    font-weight: bold;
-    padding: 2rem;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    }
-    
-    .timezone-container, .timer-container {
-    font-size: 1.4rem;
-    }
-    
-    #timezone, #timerInput, #startTimer {
-    font-size: 1.4rem;
-    padding: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.3);
-    color: #fff;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+.clock {
+    background: rgba(19, 20, 25, 0.9);
+    height: 150px;
+    width: 400px;
+    line-height: 150px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+    transition: transform 0.3s;
+    margin-bottom: 20px; /* Khoảng cách dưới đồng hồ */
+}
+
+.clock:hover {
+    transform: scale(1.05);
+}
+
+.clock .display {
+    font-size: 60px;
+    color: #00ffff;
+    letter-spacing: 5px;
+    font-family: 'Orbitron', 'sans-serif';
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+label {
+    font-size: 20px;
+    color: #ffffff;
+    margin: 10px 0; /* Khoảng cách trên và dưới */
+}
+
+select, input[type="number"] {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #00ffff;
+    outline: none;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    width: 200px; /* Chiều rộng cố định */
+}
+
+select:focus, input[type="number"]:focus {
+    border-color: #ff6699;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #00ffff;
+    color: #000;
     border: none;
     border-radius: 5px;
-    }
-    
-    #startTimer {
     cursor: pointer;
-    background-color: #0077b6;
-    transition: background-color 0.3s ease;
-    }
-    
-    #startTimer:hover {
-    background-color: #005a8e;
-    }
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 10px; /* Khoảng cách trên nút */
+}
+
+button:hover {
+    background-color: #ff6699;
+    transform: scale(1.05);
+}
+
+.timer-container {
+    text-align: center;
+    margin-top: 20px; /* Khoảng cách trên phần hẹn giờ */
+}
+
+.timer-container input[type="number"] {
+    width: 100px; /* Chiều rộng cố định cho input hẹn giờ */
+}
+
+.timer-container label {
+    display: block; /* Hiển thị label như một khối */
+}
+.weather-container {
+    text-align: center;
+    margin-top: 20px; /* Khoảng cách trên phần thời tiết */
+}
+
+.weather-container input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #00ffff;
+    outline: none;
+    font-size: 16px;
+    width: 200px; /* Chiều rộng cố định */
+}
