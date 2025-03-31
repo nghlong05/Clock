@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="clock">
+            <div class="display">12:00:00 AM</div>
+        </div>
+        <div class="timezone-container">
+            <label for="timezone">Chọn múi giờ:</label>
+            <select id="timezone">
+                <option value="-5">EST</option>
+                <option value="-4">EDT</option>
+                <option value="0">GMT</option>
+                <option value="1">CET</option>
+                <option value="8">CST</option>
+                <option value="9">JST</option>
+            </select>
+        </div>
+        <div class="timer-container">
+            <input type="number" id="timerInput" placeholder="Giây" />
+            <button id="startTimer">Bắt đầu hẹn giờ</button>
+        </div>
+    </div>
+    <script>
+        let timer;
+        document.getElementById('startTimer').addEventListener('click', function() {
+            const seconds = parseInt(document.getElementById('timerInput').value);
+            if (!isNaN(seconds) && seconds > 0) {
+                clearInterval(timer);
+                timer = setTimeout(() => {
+                    alert('Hẹn giờ đã kết thúc!');
+                }, seconds * 1000);
+            }
+        });
+
+        setInterval(function(){
+            const clock = document.querySelector(".display");
+            const time = new Date();
+            const timezoneOffset = parseInt(document.getElementById('timezone').value);
+            time.setHours(time.getHours() + timezoneOffset);
+            let sec = time.getSeconds();
+            let min = time.getMinutes();
+            let hr = time.getHours();
+            let day = 'AM';
+            if(hr >= 12){
+                day = 'PM';
+                if(hr > 12) hr -= 12; // Chuyển đổi sang định dạng 12 giờ
+            }
+            if(hr === 0) hr = 12; // Xử lý 12 AM
+            if(sec < 10) sec = '0' + sec; // Thêm số 0 cho giây
+            if(min < 10) min = '0' + min; // Thêm số 0 cho phút
+            if(hr < 10) hr = '0' + hr; // Thêm số 0 cho giờ
+            clock.textContent = hr + ':' + min + ':' + sec + " " + day;
+            
+            
+            function updateBackground() {
+                const body = document.body;
+                const hour = new Date().getHours();
+                
+                if (hour >= 6 && hour < 12) {
+                    body.style.background = 'linear-gradient(135deg, #ffcc00, #ff6699)'; // Sáng
+                } else if (hour >= 12 && hour < 18) {
+                    body.style.background = 'linear-gradient(135deg, #00ccff, #ff6699)'; // Trưa
+                } else {
+                    body.style.background = 'linear-gradient(135deg, #1a1a2e, #16213e)'; // Tối
+                }
+            }
+
+            // Gọi hàm để cập nhật nền ngay khi tải trang
+            updateBackground();
+            // Cập nhật nền mỗi giờ
+            setInterval(updateBackground, 3600000);
+
+        }, 1000);
+    </script>
+</body>
+</html>
